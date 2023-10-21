@@ -12,16 +12,18 @@ import static moe.konara.selectlative.Utils.*;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class Events {
     @SubscribeEvent
-    public static void onAdvancement(final AdvancementEvent event) {
-        String advancement_id = event.getAdvancement().getId().toString();
-        if(CONFIG.Advancement_LogInfo)
-            LOGGER.info(advancement_id);
+    public static void onAdvancement(final AdvancementEvent.AdvancementEarnEvent event) {
+        if(event!=null) {
+            String advancement_id = event.getAdvancement().getId().toString();
+            if (CONFIG.Advancement_LogInfo)
+                LOGGER.info(advancement_id);
 
-        if(CONFIG.contain(advancement_id)) {
-            DATA.SetGranted(advancement_id);
-            for (ServerPlayer player : event.getEntity().getServer().getPlayerList().getPlayers()) {
-                if (event.getEntity().getUUID() != player.getUUID()) {
-                    GrantAchievement(player, advancement_id);
+            if (CONFIG.contain(advancement_id)) {
+                DATA.SetGranted(advancement_id);
+                for (ServerPlayer player : event.getEntity().getServer().getPlayerList().getPlayers()) {
+                    if (event.getEntity().getUUID() != player.getUUID()) {
+                        GrantAchievement(player, advancement_id);
+                    }
                 }
             }
         }
