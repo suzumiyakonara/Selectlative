@@ -51,7 +51,6 @@ public class Utils {
                 AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
                 if(!progress.isDone()) {
                     LOGGER.debug("Granting \"" + advancement_id + "\" Advancement for" + player.getName().getString());
-                    //player.getAdvancements().getOrStartProgress(advancement).grantProgress(advancement.getCriteria().);
                     for (String criterion : advancement.getCriteria().keySet())
                     {
                         player.getAdvancements().award(advancement, criterion);
