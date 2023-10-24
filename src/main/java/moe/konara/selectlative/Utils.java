@@ -1,6 +1,7 @@
 package moe.konara.selectlative;
 
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -43,12 +44,12 @@ public class Utils {
     }
 
     public static void GrantAchievement(ServerPlayer player, String advancement_id){
-        for(Advancement advancement : player.getServer().getAdvancements().getAllAdvancements())
-            if(advancement.getId().toString().equals(advancement_id)) {
+        for(AdvancementHolder advancement : player.getServer().getAdvancements().getAllAdvancements())
+            if(advancement.id().toString().equals(advancement_id)) {
                 AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
                 if(!progress.isDone()) {
                     LOGGER.debug("Granting \"" + advancement_id + "\" Advancement for" + player.getName().getString());
-                    for (String criterion : advancement.getCriteria().keySet())
+                    for (String criterion : advancement.value().criteria().keySet())
                     {
                         player.getAdvancements().award(advancement, criterion);
                     }

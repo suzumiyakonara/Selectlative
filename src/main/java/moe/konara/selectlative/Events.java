@@ -12,9 +12,9 @@ import static moe.konara.selectlative.Utils.*;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class Events {
     @SubscribeEvent
-    public static void onAdvancement(final AdvancementEvent.AdvancementEarnEvent event) {
+    public static void onAdvancement(final AdvancementEvent.AdvancementProgressEvent event) {
         if(event!=null) {
-            String advancement_id = event.getAdvancement().getId().toString();
+            String advancement_id = event.getAdvancement().id().toString();
             if (CONFIG.Advancement_LogInfo)
                 LOGGER.info(advancement_id);
 
